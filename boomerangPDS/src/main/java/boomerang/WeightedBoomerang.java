@@ -1090,6 +1090,7 @@ public abstract class WeightedBoomerang<W extends Weight> {
 
         if (analysisWatch.isRunning()) {
             analysisWatch.stop();
+            analysisWatch.reset();
         }
         return new ForwardBoomerangResults<W>(query, icfg(), timedout, this.queryToSolvers, getStats(), analysisWatch);
     }
