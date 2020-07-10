@@ -176,6 +176,23 @@ public abstract class SyncPDSSolver<Stmt extends Location, Fact, Field extends L
             }
         };
 
+        applyPoststar(callSummaries, fieldSummaries);
+
+    }
+
+    public SyncPDSSolver(
+            WeightedPAutomaton<Field, INode<Node<Stmt, Fact>>, W> fieldAutomaton,
+            WeightedPAutomaton<Stmt, INode<Fact>, W> callAutomaton,
+            NestedWeightedPAutomatons<Field, INode<Node<Stmt, Fact>>, W> fieldSummaries,
+            NestedWeightedPAutomatons<Stmt, INode<Fact>, W> callSummaries) {
+        this.callAutomaton = callAutomaton;
+        this.fieldAutomaton = fieldAutomaton;
+        applyPoststar(callSummaries, fieldSummaries);
+    }
+
+    private void applyPoststar(
+            NestedWeightedPAutomatons<Stmt, INode<Fact>, W> callSummaries,
+            NestedWeightedPAutomatons<Field, INode<Node<Stmt, Fact>>, W> fieldSummaries) {
         callAutomaton.registerListener(new CallAutomatonListener());
         fieldAutomaton.registerListener(new FieldUpdateListener());
         if (callAutomaton.nested())
@@ -184,7 +201,6 @@ public abstract class SyncPDSSolver<Stmt extends Location, Fact, Field extends L
         // fieldAutomaton.registerNestedAutomatonListener(new FieldSummaryListener());
         callingPDS.poststar(callAutomaton, callSummaries);
         fieldPDS.poststar(fieldAutomaton, fieldSummaries);
-
     }
 
     protected void onManyStateListenerRegister() {
