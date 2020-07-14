@@ -170,15 +170,25 @@ public class JimpleStatement extends Statement {
   }
 
   public Val getLeftOp() {
-    assert isAssign();
-    AssignStmt assignStmt = (AssignStmt) delegate;
-    return new JimpleVal(assignStmt.getLeftOp(), method);
+    assert isAssign() || isIdentityStmt();
+    if (isAssign()) {
+      AssignStmt assignStmt = (AssignStmt) delegate;
+      return new JimpleVal(assignStmt.getLeftOp(), method);
+    } else {
+      IdentityStmt identityStmt = (IdentityStmt) delegate;
+      return new JimpleVal(identityStmt.getLeftOp(), method);
+    }
   }
 
   public Val getRightOp() {
-    assert isAssign();
-    AssignStmt assignStmt = (AssignStmt) delegate;
-    return new JimpleVal(assignStmt.getRightOp(), method);
+    assert isAssign() || isIdentityStmt();
+    if (isAssign()) {
+      AssignStmt assignStmt = (AssignStmt) delegate;
+      return new JimpleVal(assignStmt.getRightOp(), method);
+    } else {
+      IdentityStmt identityStmt = (IdentityStmt) delegate;
+      return new JimpleVal(identityStmt.getRightOp(), method);
+    }
   }
 
   public boolean isInstanceOfStatement(Val fact) {
