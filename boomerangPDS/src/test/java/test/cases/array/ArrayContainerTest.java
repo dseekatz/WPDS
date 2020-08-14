@@ -11,8 +11,9 @@
  */
 package test.cases.array;
 
+import org.junit.Ignore;
 import org.junit.Test;
-import test.cases.array.ArrayTest.NoAllocation;
+import test.cases.array.ArrayIndexSensitiveTest.NoAllocation;
 import test.cases.fields.Alloc;
 import test.core.AbstractBoomerangTest;
 import test.core.selfrunning.AllocatedObject;
@@ -55,6 +56,7 @@ public class ArrayContainerTest extends AbstractBoomerangTest {
     public AllocatedObject[] array = new AllocatedObject[] {};
   }
 
+  @Ignore
   @Test
   public void insertAndGetDouble() {
     ArrayOfArrayOfContainers outerContainer = new ArrayOfArrayOfContainers();
