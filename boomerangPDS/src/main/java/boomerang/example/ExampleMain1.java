@@ -132,7 +132,16 @@ public class ExampleMain1 {
         // 1. Create a Boomerang solver.
         Boomerang solver =
             new Boomerang(
-                sootCallGraph, SootDataFlowScope.make(Scene.v()), new DefaultBoomerangOptions());
+                sootCallGraph,
+                SootDataFlowScope.make(Scene.v()),
+                new DefaultBoomerangOptions()
+                {
+                  @Override
+                  public boolean callSummaries() {
+                    return true;
+                  }
+                }
+                );
 
         // 2. Submit a query to the solver.
         Collection<Query> seeds = scope.computeSeeds();

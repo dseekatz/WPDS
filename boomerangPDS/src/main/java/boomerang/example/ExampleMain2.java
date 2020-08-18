@@ -149,7 +149,15 @@ public class ExampleMain2 {
           // 1. Create a Boomerang solver.
           Boomerang solver =
               new Boomerang(
-                  sootCallGraph, SootDataFlowScope.make(Scene.v()), new DefaultBoomerangOptions());
+                      sootCallGraph,
+                      SootDataFlowScope.make(Scene.v()),
+                      new DefaultBoomerangOptions() {
+                        @Override
+                        public boolean fieldSummaries() {
+                          return true;
+                        }
+                      }
+              );
           System.out.println("Solving query: " + query);
           // 2. Submit a query to the solver.
           ForwardBoomerangResults<NoWeight> forwardBoomerangResults =
