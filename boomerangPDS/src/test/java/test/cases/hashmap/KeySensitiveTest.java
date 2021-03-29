@@ -11,7 +11,6 @@
  */
 package test.cases.hashmap;
 
-<<<<<<< HEAD
 import boomerang.scene.DataFlowScope;
 import boomerang.scene.SootDataFlowScope;
 import java.util.HashMap;
@@ -20,11 +19,6 @@ import org.junit.Test;
 import soot.Scene;
 import test.cases.array.ArrayTest.NoAllocation;
 import test.cases.basic.Allocation;
-=======
-import java.util.HashMap;
-import java.util.Map;
-import org.junit.Test;
->>>>>>> 58569f44a8c99e563fc08628028aba7324b92c51
 import test.cases.fields.Alloc;
 import test.core.AbstractBoomerangTest;
 import test.core.selfrunning.AllocatedObject;
@@ -44,7 +38,6 @@ public class KeySensitiveTest extends AbstractBoomerangTest {
   public void directAccess2Keys() {
     AllocatedObject someValue = new Alloc();
     Map<String, Object> x = new HashMap<>();
-<<<<<<< HEAD
     x.put("key", someValue);
     x.put("key2", new NoAllocation());
     Object t = x.get("key");
@@ -57,8 +50,6 @@ public class KeySensitiveTest extends AbstractBoomerangTest {
     Map<String, Object> x = new HashMap<>();
     // False Positive: Overapproximation. We do not kill during the forward analysis.
     x.put("key", new Allocation());
-=======
->>>>>>> 58569f44a8c99e563fc08628028aba7324b92c51
     x.put("key", someValue);
     Object t = x.get("key");
     queryFor(t);
